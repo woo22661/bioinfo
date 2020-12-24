@@ -1,0 +1,24 @@
+#!/usr/bin/env python4.6
+
+import sys
+f = open(sys.argv[1])
+f = f.read()
+f = f.split('\n')
+f.sort()
+f = f[1:]
+f.insert(0, '0 0')
+
+L = []
+cnt = 0
+print(f)
+while cnt != len(f)-1:
+        h= float(f[cnt+1][0]) - float(f[cnt][0])
+        line = float(f[cnt+1][2]) + float(f[cnt][2])
+        result = line * h / 2
+        L.append(result)
+        cnt += 1
+        print(result)
+total = 0
+for y in L:
+        total += y
+print('The area under the curve is', total)

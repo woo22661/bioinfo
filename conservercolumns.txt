@@ -1,0 +1,36 @@
+#!/usr/bin/env python3.6
+
+import sys
+f = open(sys.argv[1])
+f = f.read()
+f = f.split('>')
+f = f[1:]
+seq = []
+for x in f:
+        c = x.find('\n')
+        l = x[c+1:]
+        l = l.replace('\n' , '')
+        seq.append(l)
+c1 = 0
+P = []
+result = []
+for i in range(len(seq)):
+        for j in range(len(seq)):
+                if j > i:
+                        for k in range(len(seq[i])):
+                                if seq[i][k] == '-' or seq[j][k] == '-':
+                                        c1 = 0
+                                elif seq[i][k] == seq[j][k]:
+                                        c1 += 1
+                                elif seq[i][k] != seq[j][k]:
+                                        if c1 != 0:
+                                                P.append(c1)
+
+                                        c1 = 0
+
+                        P = list(set(P))
+                        result.append(P[0])
+                        result.append(P[len(P)-1])
+P.sort()
+print('Max number of conserved colums =', P[len(P)-1], 'from mouse:rat')
+print('Min number of conserved colums =', P[0], 'from cow:mouse cow:rat human:mouse human:rat')
